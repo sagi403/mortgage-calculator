@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mortgage-mongo-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mortgage-mongo
+  template:
+    metadata:
+      labels:
+        app: mortgage-mongo
+    spec:
+      containers:
+        - name: mortgage-mongo
+          image: mongo
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mortgage-mongo-srv
+spec:
+  selector:
+    app: mortgage-mongo
+  ports:
+    - name: db
+      protocol: TCP
+      port: 27017
+      targetPort: 27017

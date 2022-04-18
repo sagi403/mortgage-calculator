@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mortgage-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mortgage
+  template:
+    metadata:
+      labels:
+        app: mortgage
+    spec:
+      containers:
+        - name: mortgage
+          image: sagi403/mortgage
+          env:
+            - name: MONGO_URI
+              value: "mongodb://mortgage-mongo-srv:27017/mortgage"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mortgage-srv
+spec:
+  selector:
+    app: mortgage
+  ports:
+    - name: mortgage
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
