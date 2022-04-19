@@ -1,8 +1,10 @@
 import { MongoMemoryServer } from "mongodb-memory-server";
 import mongoose from "mongoose";
 
+let mongo;
+
 beforeAll(async () => {
-  const mongo = await MongoMemoryServer.create();
+  mongo = await MongoMemoryServer.create();
   const mongoUri = mongo.getUri();
 
   await mongoose.connect(mongoUri);
