@@ -5,7 +5,7 @@ export class RequestValidationError extends Error {
     Object.setPrototypeOf(this, RequestValidationError.prototype);
   }
 
-  serialErrors() {
+  serializeErrors() {
     return this.errors.map(err => {
       return { message: err.msg, field: err.param };
     });
