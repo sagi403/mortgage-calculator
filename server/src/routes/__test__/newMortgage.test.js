@@ -52,3 +52,22 @@ it("returns an error if an invalid mortgageAmount is provided", async () => {
     })
     .expect(400);
 });
+
+it("returns an error if an invalid termYearly is provided", async () => {
+  await request(app)
+    .post("/api/total-cost")
+    .send({
+      mortgageAmount: 500000,
+      termYearly: -5,
+      interestYearly: 3.5,
+    })
+    .expect(400);
+
+  await request(app)
+    .post("/api/total-cost")
+    .send({
+      mortgageAmount: 500000,
+      interestYearly: 3.5,
+    })
+    .expect(400);
+});
