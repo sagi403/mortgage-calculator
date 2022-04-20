@@ -47,6 +47,15 @@ it("returns an error if an invalid mortgageAmount is provided", async () => {
   await request(app)
     .post("/api/total-cost")
     .send({
+      mortgageAmount: "abc",
+      termYearly: 20,
+      interestYearly: 3.5,
+    })
+    .expect(400);
+
+  await request(app)
+    .post("/api/total-cost")
+    .send({
       termYearly: 20,
       interestYearly: 3.5,
     })
@@ -67,7 +76,35 @@ it("returns an error if an invalid termYearly is provided", async () => {
     .post("/api/total-cost")
     .send({
       mortgageAmount: 500000,
+      termYearly: "abc",
       interestYearly: 3.5,
+    })
+    .expect(400);
+
+  await request(app)
+    .post("/api/total-cost")
+    .send({
+      mortgageAmount: 500000,
+      interestYearly: 3.5,
+    })
+    .expect(400);
+});
+
+it("returns an error if an invalid interestYearly is provided", async () => {
+  await request(app)
+    .post("/api/total-cost")
+    .send({
+      mortgageAmount: 500000,
+      termYearly: 20,
+      interestYearly: "abc",
+    })
+    .expect(400);
+
+  await request(app)
+    .post("/api/total-cost")
+    .send({
+      mortgageAmount: 500000,
+      termYearly: 20,
     })
     .expect(400);
 });

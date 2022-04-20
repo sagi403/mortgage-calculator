@@ -11,8 +11,10 @@ router.post(
   [
     body("mortgageAmount")
       .isFloat({ gt: 0 })
+      .isNumeric()
       .withMessage("Mortgage amount must be greater than 0"),
     body("termYearly")
+      .isNumeric()
       .isFloat({ gt: 0 })
       .withMessage("Yearly term must be greater than 0"),
     body("interestYearly")
