@@ -34,21 +34,21 @@ it("creates a mortgage with valid parameters", async () => {
   expect(mortgage[0].totalInterest.toFixed(2)).toEqual("192569.80");
 });
 
-// it("returns an error if an invalid mortgageAmount is provided", async () => {
-//   await request(app)
-//     .post("/api/total-cost")
-//     .send({
-//       mortgageAmount: "",
-//       termYearly: 20,
-//       interestYearly: 3.5,
-//     })
-//     .expect(400);
+it("returns an error if an invalid mortgageAmount is provided", async () => {
+  await request(app)
+    .post("/api/total-cost")
+    .send({
+      mortgageAmount: -5,
+      termYearly: 20,
+      interestYearly: 3.5,
+    })
+    .expect(400);
 
-//   await request(app)
-//     .post("/api/total-cost")
-//     .send({
-//       termYearly: 20,
-//       interestYearly: 3.5,
-//     })
-//     .expect(400);
-// });
+  await request(app)
+    .post("/api/total-cost")
+    .send({
+      termYearly: 20,
+      interestYearly: 3.5,
+    })
+    .expect(400);
+});

@@ -2,6 +2,8 @@ export class RequestValidationError extends Error {
   statusCode = 400;
 
   constructor(errors) {
+    super();
+
     Object.setPrototypeOf(this, RequestValidationError.prototype);
   }
 

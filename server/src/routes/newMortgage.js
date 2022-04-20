@@ -10,15 +10,6 @@ router.post(
   "/api/total-cost",
   [
     body("mortgageAmount")
-      .not()
-      .isEmpty()
-      .withMessage("Mortgage amount is required"),
-    body("termYearly").not().isEmpty().withMessage("Yearly term is required"),
-    body("interestYearly")
-      .not()
-      .isEmpty()
-      .withMessage("Yearly interest rate is required"),
-    body("mortgageAmount")
       .isFloat({ gt: 0 })
       .withMessage("Mortgage amount must be greater than 0"),
     body("termYearly")
