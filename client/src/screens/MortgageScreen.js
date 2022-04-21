@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Form, Button, Row, Col, Container } from "react-bootstrap";
+import { Form, Button, Row, Col } from "react-bootstrap";
+import FormContainer from "../components/FormContainer";
 
 const MortgageScreen = () => {
   const [mortgageAmount, setMortgageAmount] = useState("");
@@ -15,7 +16,7 @@ const MortgageScreen = () => {
   };
 
   return (
-    <Container>
+    <FormContainer>
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="mortgageAmount" className="mb-3">
           <Form.Label>Mortgage Amount: </Form.Label>
@@ -27,7 +28,7 @@ const MortgageScreen = () => {
           ></Form.Control>
         </Form.Group>
       </Form>
-    </Container>
+    </FormContainer>
   );
 };
 
