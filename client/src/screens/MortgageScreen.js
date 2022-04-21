@@ -15,6 +15,36 @@ const MortgageScreen = () => {
     e.preventDefault();
   };
 
+  const onBlurMortgage = () => {
+    const value = parseFloat(mortgageAmount);
+
+    if (isNaN(value)) {
+      return;
+    }
+
+    setMortgageAmount(value.toFixed(0));
+  };
+
+  const onBlurTerm = () => {
+    const value = parseFloat(termYearly);
+
+    if (isNaN(value)) {
+      return;
+    }
+
+    setTermYearly(value.toFixed(0));
+  };
+
+  const onBlurInterest = () => {
+    const value = parseFloat(interestYearly);
+
+    if (isNaN(value)) {
+      return;
+    }
+
+    setInterestYearly(value.toFixed(2));
+  };
+
   return (
     <>
       <FormContainer>
@@ -26,6 +56,7 @@ const MortgageScreen = () => {
               type="mortgageAmount"
               placeholder="$500,000"
               value={mortgageAmount}
+              onBlur={onBlurMortgage}
               onChange={e => setMortgageAmount(e.target.value)}
             ></Form.Control>
           </Form.Group>
@@ -36,6 +67,7 @@ const MortgageScreen = () => {
               type="termYearly"
               placeholder="20"
               value={termYearly}
+              onBlur={onBlurTerm}
               onChange={e => setTermYearly(e.target.value)}
             ></Form.Control>
           </Form.Group>
@@ -46,6 +78,7 @@ const MortgageScreen = () => {
               type="interestYearly"
               placeholder="3.50%"
               value={interestYearly}
+              onBlur={onBlurInterest}
               onChange={e => setInterestYearly(e.target.value)}
             ></Form.Control>
           </Form.Group>
