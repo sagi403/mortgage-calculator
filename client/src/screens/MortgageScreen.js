@@ -15,7 +15,6 @@ const MortgageScreen = () => {
     url: "/api/total-cost",
     method: "post",
     body: { mortgageAmount, termYearly, interestYearly },
-    // onSuccess: mortgage => console.log(mortgage),
   });
 
   const submitHandler = async e => {
@@ -107,7 +106,9 @@ const MortgageScreen = () => {
             <center>
               <h3>Monthly Payment</h3>
               <Alert variant="success">
-                {monthlyPayment === "$" ? "$" : "$" + monthlyPayment}
+                {monthlyPayment === "$"
+                  ? "$"
+                  : "$" + monthlyPayment.toLocaleString()}
               </Alert>
             </center>
           </Col>
@@ -115,7 +116,7 @@ const MortgageScreen = () => {
             <center>
               <h3>Total Cost</h3>
               <Alert variant="success">
-                {totalCost === "$" ? "$" : "$" + totalCost}
+                {totalCost === "$" ? "$" : "$" + totalCost.toLocaleString()}
               </Alert>
             </center>
           </Col>
@@ -123,7 +124,9 @@ const MortgageScreen = () => {
             <center>
               <h3>Total Interest</h3>
               <Alert variant="success">
-                {totalInterest === "$" ? "$" : "$" + totalInterest}
+                {totalInterest === "$"
+                  ? "$"
+                  : "$" + totalInterest.toLocaleString()}
               </Alert>
             </center>
           </Col>
