@@ -7,22 +7,24 @@ const MortgageScreen = () => {
   const [mortgageAmount, setMortgageAmount] = useState("");
   const [termYearly, setTermYearly] = useState("");
   const [interestYearly, setInterestYearly] = useState("");
-  // const [interestMonthly, setInterestMonthly] = useState("");
-  // const [monthlyPayment, setMonthlyPayment] = useState("");
-  // const [totalCost, setTotalCost] = useState("");
-  // const [totalInterest, setTotalInterest] = useState("");
+  const [monthlyPayment, setMonthlyPayment] = useState("$");
+  const [totalCost, setTotalCost] = useState("$");
+  const [totalInterest, setTotalInterest] = useState("$");
 
   const { doRequest, errors } = useRequest({
     url: "/api/total-cost",
     method: "post",
     body: { mortgageAmount, termYearly, interestYearly },
-    onSuccess: mortgage => console.log(mortgage),
+    // onSuccess: mortgage => console.log(mortgage),
   });
 
-  const submitHandler = e => {
+  const submitHandler = async e => {
     e.preventDefault();
 
-    doRequest();
+    const mortgage = await doRequest();
+    setMonthlyPayment(mortgage.monthlyPayment);
+    setTotalCost(mortgage.totalCost);
+    setTotalInterest(mortgage.totalInterest);
   };
 
   const onBlurMortgage = () => {
@@ -104,19 +106,25 @@ const MortgageScreen = () => {
           <Col xs={12} md={4}>
             <center>
               <h3>Monthly Payment</h3>
-              <Alert variant="success">$</Alert>
+              <Alert variant="success">
+                {monthlyPayment === "$" ? "$" : "$" + monthlyPayment}
+              </Alert>
             </center>
           </Col>
           <Col xs={12} md={4}>
             <center>
               <h3>Total Cost</h3>
-              <Alert variant="success">$</Alert>
+              <Alert variant="success">
+                {totalCost === "$" ? "$" : "$" + totalCost}
+              </Alert>
             </center>
           </Col>
           <Col xs={12} md={4}>
             <center>
               <h3>Total Interest</h3>
-              <Alert variant="success">$</Alert>
+              <Alert variant="success">
+                {totalInterest === "$" ? "$" : "$" + totalInterest}
+              </Alert>
             </center>
           </Col>
         </Row>
