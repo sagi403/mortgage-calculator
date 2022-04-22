@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Form, Button, Row, Col, Container, Alert } from "react-bootstrap";
+import useRequest from "../hooks/use-request";
 import FormContainer from "../components/FormContainer";
 
 const MortgageScreen = () => {
@@ -11,8 +12,17 @@ const MortgageScreen = () => {
   // const [totalCost, setTotalCost] = useState("");
   // const [totalInterest, setTotalInterest] = useState("");
 
+  const { doRequest, errors } = useRequest({
+    url: "/api/total-cost",
+    method: "post",
+    body: { mortgageAmount, termYearly, interestYearly },
+    onSuccess: mortgage => console.log(mortgage),
+  });
+
   const submitHandler = e => {
     e.preventDefault();
+
+    doRequest();
   };
 
   const onBlurMortgage = () => {
@@ -82,7 +92,7 @@ const MortgageScreen = () => {
               onChange={e => setInterestYearly(e.target.value)}
             ></Form.Control>
           </Form.Group>
-
+          {errors}
           <Button type="submit" variant="primary">
             Check
           </Button>
